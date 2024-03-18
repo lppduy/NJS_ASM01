@@ -47,9 +47,15 @@
 					"name": "api/movies/top-rate",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "8qlOkxz4wq",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "http://localhost:8000/api/movies/top-rate?page=5",
+							"raw": "http://localhost:8000/api/movies/top-rate?page=1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -63,7 +69,7 @@
 							"query": [
 								{
 									"key": "page",
-									"value": "5"
+									"value": "1"
 								}
 							]
 						}
