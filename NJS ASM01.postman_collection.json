@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "f2937cd0-9068-4adf-b841-2c8bff992b4a",
+		"name": "NJS ASM01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "29239751",
+		"_collection_link": "https://cloudy-eclipse-732781.postman.co/workspace/HDIT~f67b6c37-0456-4ea5-b8b4-c2d2d5207042/collection/29239751-f2937cd0-9068-4adf-b841-2c8bff992b4a?action=share&source=collection_link&creator=29239751"
+	},
+	"item": [
+		{
+			"name": "movies",
+			"item": [
+				{
+					"name": "api/movies/trending",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "8qlOkxz4wq",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/movies/trending?page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"movies",
+								"trending"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/movies/top-rate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8000/api/movies/top-rate?page=5",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"movies",
+								"top-rate"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/movies/discover",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "8qlOkxz4wq",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8000/api/movies/discover?genre=10752&page=2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"movies",
+								"discover"
+							],
+							"query": [
+								{
+									"key": "genre",
+									"value": "10752"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "api/movies/video",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "8qlOkxz4wq",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"film_id\" :  361743\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/movies/video"
+					},
+					"response": []
+				},
+				{
+					"name": "api/movies/search",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "8qlOkxz4wq",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"keyword\": \"gun\",\n  \"genre\": \"action\",\n  \"mediaType\": \"movie\",\n  \"language\": \"en\",\n  \"year\": 2022\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/movies/search"
+					},
+					"response": []
+				},
+				{
+					"name": "api/movies/notfound",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"film_id\" :  361743\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8000/api/movies/search"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
