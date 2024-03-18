@@ -108,15 +108,60 @@ exports.getMovieTrailer = (req, res) => {
 };
 
 exports.searchMovies = (req, res) => {
-  const keyword = req.body.keyword;
+  const { keyword, genre, mediaType, language, year } = req.body;
+  const page = req.body.page || 1; // If page is not provided, default to 1
+
+
   if (!keyword) {
-    return res.status(400).json({ message: "Not found keyword param" });
+    return res.status(400).json({ message: "Keyword is required" });
   }
 
-  const matchedMovies = Movies.all().filter(movie =>
+  // Get all movies
+  const movies = Movies.all();
+
+  let matchedMovies = movies.filter(movie =>
     (movie.title && movie.title.toLowerCase().includes(keyword.toLowerCase())) ||
     (movie.overview && movie.overview.toLowerCase().includes(keyword.toLowerCase()))
   );
 
-  res.status(200).json(matchedMovies);
+  if (genre) {
+    const genreId = Genres.findIdByName(genre);
+    matchedMovies = matchedMovies.filter(movie => movie.genre_ids.includes(genreId));
+  }
+
+  if (mediaType) {
+    if (mediaType.toLowerCase() === 'all') {
+      // Do nothing, keep all matchedMovies
+    } else if (['movie', 'tv', 'person'].includes(mediaType.toLowerCase())) {
+      matchedMovies = matchedMovies.filter(movie => movie.media_type && movie.media_type.toLowerCase() === mediaType.toLowerCase());
+    } else {
+      return res.status(400).json({ message: "Invalid mediaType. Valid options are 'all', 'movie', 'tv', 'person'." });
+    }
+  }
+
+  if (language) {
+    if (['en', 'ja', 'ko'].includes(language.toLowerCase())) {
+      matchedMovies = matchedMovies.filter(movie => movie.original_language && movie.original_language.toLowerCase() === language.toLowerCase());
+    } else {
+      return res.status(400).json({ message: "Invalid language. Valid options are 'en', 'ja', 'ko'." });
+    }
+  }
+
+  if (year) {
+    matchedMovies = matchedMovies.filter(movie => movie.release_date && new Date(movie.release_date).getFullYear() === year);
+  }
+
+  const paginatedMovies = paginate(matchedMovies, page, PAGE_SIZE);
+
+  const output = {
+    results: paginatedMovies,
+    page: page,
+    total_pages: Math.ceil(matchedMovies.length / PAGE_SIZE),
+    genre_name: genre,
+    media_type: mediaType,
+    language,
+    year,
+  };
+
+  res.status(200).json(output);
 };
