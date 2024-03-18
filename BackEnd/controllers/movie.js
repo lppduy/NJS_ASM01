@@ -108,8 +108,8 @@ exports.getMovieTrailer = (req, res) => {
 };
 
 exports.searchMovies = (req, res) => {
-  const { keyword, genre, mediaType, language, year } = req.body;
-  const page = req.body.page || 1; // If page is not provided, default to 1
+  const { keyword, genre, mediaType, language, year, page } = req.body;
+  let pageInt = parseInt(page);
 
 
   if (!keyword) {
@@ -151,12 +151,20 @@ exports.searchMovies = (req, res) => {
     matchedMovies = matchedMovies.filter(movie => movie.release_date && new Date(movie.release_date).getFullYear() === year);
   }
 
-  const paginatedMovies = paginate(matchedMovies, page, PAGE_SIZE);
+  const totalPages = Math.ceil(matchedMovies.length / PAGE_SIZE);
+
+  // Check if page is greater than total pages
+  if (pageInt > totalPages) {
+    pageInt = totalPages;
+    // return res.status(400).json({ message: `Invalid page. Maximum page is ${totalPages}` });
+  }
+
+  const paginatedMovies = paginate(matchedMovies, pageInt, PAGE_SIZE);
 
   const output = {
     results: paginatedMovies,
-    page: page,
-    total_pages: Math.ceil(matchedMovies.length / PAGE_SIZE),
+    page: pageInt,
+    total_pages: totalPages,
     genre_name: genre,
     media_type: mediaType,
     language,

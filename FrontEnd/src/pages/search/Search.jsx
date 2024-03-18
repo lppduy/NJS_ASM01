@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Nav from '../../components/browse/Nav';
 import SearchResult from '../../components/search/SearchResult';
@@ -7,14 +7,31 @@ import './Search.css';
 const Search = () => {
 	const [query, setQuery] = useState('');
 	const [searchInput, setSearchInput] = useState('');
+	const [pageInfo, setPageInfo] = useState({});
+
+	const [genre, setGenre] = useState('');
+	const [mediaType, setMediaType] = useState('');
+	const [language, setLanguage] = useState('');
+	const [year, setYear] = useState('');
+	const [page, setPage] = useState('');
 
 	const handleSearch = () => {
 		setQuery(searchInput);
 	}
 
+	const handlePageInfo = (data) => {
+		setPageInfo(data);
+	};
+
 	const resetSearch = () => {
 		setQuery('');
+		setGenre('');
+		setMediaType('');
+		setLanguage('');
 		setSearchInput('');
+		setYear('');
+		setPage('');
+		setPageInfo({});
 	}
 
 	return (
@@ -50,6 +67,9 @@ const Search = () => {
 							<div className='row third'>
 								<div className='input-field'>
 									<div className='result-count'>
+										{pageInfo.message && <span style={{ color: 'red' }}>{pageInfo.message}</span>}
+										{pageInfo.totalResults > 0 && <span>{pageInfo.totalResults} results</span>}
+										{pageInfo.totalPages > 0 && <span>Page {pageInfo.page}/{pageInfo.totalPages}</span>}
 
 									</div>
 									<div className='group-btn'>
@@ -72,7 +92,40 @@ const Search = () => {
 					</div>
 				</form>
 			</div>
-			<SearchResult query={query} />
+			<div className="advance-feature">
+				<input
+					type='text'
+					placeholder='Genre'
+					onChange={(e) => setGenre(e.target.value)}
+					value={genre}
+				/>
+				<input
+					type='text'
+					placeholder='Media Type'
+					onChange={(e) => setMediaType(e.target.value)}
+					value={mediaType}
+				/>
+				<input
+					type='text'
+					placeholder='Language'
+					onChange={(e) => setLanguage(e.target.value)}
+					value={language}
+				/>
+				<input
+					type='text'
+					placeholder='Year'
+					onChange={(e) => setYear(e.target.value)}
+					value={year}
+				/>
+				<input
+					type='text'
+					placeholder='Page'
+					onChange={(e) => setPage(e.target.value)}
+					value={page}
+				/>
+			</div>
+
+			<SearchResult onReceivePageInfo={handlePageInfo} data={{ query, genre, mediaType, language, year, page }} />
 		</div>
 	);
 };

@@ -742,3 +742,34 @@ legend {
 	-ms-user-select: none;
 	user-select: none;
 }
+
+
+
+/* ADVANCE SEARCH FEATURE */
+
+.advance-feature {
+	width: 60%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: auto;
+	margin-top: -50px;
+  padding: 20px;
+  /* background-color: #f2f2f2; */
+  border-radius: 5px;
+}
+
+.advance-feature input {
+  width: 100%;
+  padding: 10px;
+  /* border: 1px solid #ccc; */
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 10px 0;
+}
+
+/* .result-count {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+} */
