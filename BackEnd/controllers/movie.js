@@ -106,3 +106,17 @@ exports.getMovieTrailer = (req, res) => {
   res.status(200).json(selectedVideo);
   // 361743 for testing success, -1 for testing not found film_id, 94997 for testing not found video
 };
+
+exports.searchMovies = (req, res) => {
+  const keyword = req.body.keyword;
+  if (!keyword) {
+    return res.status(400).json({ message: "Not found keyword param" });
+  }
+
+  const matchedMovies = Movies.all().filter(movie =>
+    (movie.title && movie.title.toLowerCase().includes(keyword.toLowerCase())) ||
+    (movie.overview && movie.overview.toLowerCase().includes(keyword.toLowerCase()))
+  );
+
+  res.status(200).json(matchedMovies);
+};
