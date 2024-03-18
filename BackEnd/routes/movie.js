@@ -1,4 +1,6 @@
 const express = require('express');
+const { authenticate } = require('../middleware/auth');
+
 const { getTrendingMovies, getTopRatedMovies, getMoviesByGenre, getMovieTrailer, searchMovies } = require('../controllers/movie');
 
 const router = express.Router();
