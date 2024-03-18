@@ -9,7 +9,7 @@ Dự án này bao gồm cả Frontend và Backend.
 Đầu tiên, clone repository này về máy của bạn:
 
 ```bash
-git clone [git@github.com:lppduy/NJS_ASM01.git](https://github.com/lppduy/NJS_ASM01.git)
+git clone https://github.com/lppduy/NJS_ASM01.git
 ```
 
 ### Cài đặt Frontend
