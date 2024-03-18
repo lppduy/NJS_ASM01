@@ -1,31 +1,21 @@
 const Movies = require('../models/Movies');
-const { paginate } = require('../utils/paging');
+const paginate = require('../utils/paging').paginate;
 
-const getTrendingMovies = (req, res) => {
+const getMovies = (sortField) => (req, res) => {
   const page = parseInt(req.query.page) || 1;
-  const LIMIT = 20;
-  const movies = Movies.all().sort((a, b) => b.popularity - a.popularity);
-  const paginatedMovies = paginate(movies, page, LIMIT);
+  const PAGE_SIZE = 20;
+  const movies = Movies.all().sort((a, b) => b[sortField] - a[sortField]);
+  const paginatedMovies = paginate(movies, page, PAGE_SIZE);
 
   res.status(200).json({
     results: paginatedMovies,
     page: page,
-    total_pages: Math.ceil(movies.length / LIMIT),
+    total_pages: Math.ceil(movies.length / PAGE_SIZE),
   });
 };
 
-const getTopRatedMovies = (req, res) => {
-  const page = parseInt(req.query.page) || 1;
-  const LIMIT = 20;
-  const movies = Movies.all().sort((a, b) => b.vote_average - a.vote_average);
-  const paginatedMovies = paginate(movies, page, LIMIT);
-
-  res.status(200).json({
-    results: paginatedMovies,
-    page: page,
-    total_pages: Math.ceil(movies.length / LIMIT),
-  });
-};
+const getTrendingMovies = getMovies('popularity');
+const getTopRatedMovies = getMovies('vote_average');
 
 module.exports = {
   getTrendingMovies,
