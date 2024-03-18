@@ -51,7 +51,6 @@ npm start
 
 - Tìm kiếm phim theo từ khóa, thể loại, loại media, ngôn ngữ và năm phát hành.
 - Xem thông tin chi tiết về một bộ phim, bao gồm tiêu đề, mô tả, ngôn ngữ, ngày phát hành, thể loại và đánh giá.
-- Đánh giá một bộ phim.
 
 ## Test API với Postman
 
@@ -62,9 +61,3 @@ Dự án này cung cấp một file Postman để giúp bạn test API. Để s�
 3. Trong tab `Link`, dán link tới file Postman trong repository này, hoặc chọn tab `File` và chọn file Postman từ máy của bạn.
 4. Sau khi file đã được import, bạn sẽ thấy một collection mới trong Postman với tất cả các request để test API.
 
-## Giấy phép
-
-Dự án này được phát hành dưới giấy phép MIT. Xem file [LICENSE](LICENSE) để biết thêm chi tiết.
-```
-
-Hãy thay thế `yourusername` bằng tên người dùng GitHub của bạn và điều chỉnh các phần khác theo nhu cầu của dự án của bạn.
