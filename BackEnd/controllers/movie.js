@@ -109,7 +109,7 @@ exports.fetchMovieTrailer = (req, res) => {
 
 exports.searchMovies = (req, res) => {
   const { keyword, genre, mediaType, language, year, page } = req.body;
-  let pageInt = parseInt(page);
+  let pageInt = page && page > 0 ? parseInt(page) : 1;
 
 
   if (!keyword) {

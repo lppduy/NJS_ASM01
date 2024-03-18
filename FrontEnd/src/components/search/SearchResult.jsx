@@ -17,7 +17,7 @@ const SearchResult = ({ data, onReceivePageInfo }) => {
 					mediaType: data.mediaType,
 					language: data.language,
 					year: data.year,
-					page: data.page > 0 ? data.page : 1,
+					page: data.page,
 				});
 				setMovies(request.data.results);
 				setError(null); // Clear error
