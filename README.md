@@ -1,4 +1,3 @@
-```markdown
 # Movie App
 
 Movie App là một ứng dụng web cho phép người dùng tìm kiếm, xem thông tin và đánh giá các bộ phim.
