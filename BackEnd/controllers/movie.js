@@ -85,7 +85,7 @@ exports.getMoviesByGenre = (req, res) => {
   });
 };
 
-exports.getMovieTrailer = (req, res) => {
+exports.fetchMovieTrailer = (req, res) => {
   const filmId = req.body.film_id;
   const filmMatchedIt = Movies.all().find(m => m.id === parseInt(filmId));
   if (!filmMatchedIt) {
