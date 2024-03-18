@@ -14,6 +14,20 @@ const getTrendingMovies = (req, res) => {
   });
 };
 
+const getTopRatedMovies = (req, res) => {
+  const page = parseInt(req.query.page) || 1;
+  const LIMIT = 20;
+  const movies = Movies.all().sort((a, b) => b.vote_average - a.vote_average);
+  const paginatedMovies = paginate(movies, page, LIMIT);
+
+  res.status(200).json({
+    results: paginatedMovies,
+    page: page,
+    total_pages: Math.ceil(movies.length / LIMIT),
+  });
+};
+
 module.exports = {
   getTrendingMovies,
+  getTopRatedMovies,
 };
