@@ -31,7 +31,7 @@ npm install
 ### Chạy Frontend
 
 ```bash
-cd ./Frontend
+cd Frontend
 npm start
 ```
 
@@ -40,7 +40,7 @@ npm start
 ### Chạy Backend
 
 ```bash
-cd ./Backend
+cd Backend
 npm start
 ```
 
